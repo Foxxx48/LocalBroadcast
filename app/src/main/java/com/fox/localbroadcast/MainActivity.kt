@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.fox.localbroadcast.databinding.ActivityMainBinding
 
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
             if (intent?.action == MyService.LOADED) {
                 val percent = intent.getIntExtra(MyService.EXTRA_KEY, 100500)
                 binding.progressBar.progress = percent
+                Toast.makeText(context, "Loaded $percent %", Toast.LENGTH_SHORT).show()
             }
         }
 
