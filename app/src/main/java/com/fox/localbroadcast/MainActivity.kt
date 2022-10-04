@@ -6,9 +6,14 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.fox.localbroadcast.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private val localBroadcastManager by lazy {
+       LocalBroadcastManager.getInstance(this)
+    }
 
 
     private var _binding: ActivityMainBinding? = null
@@ -39,12 +44,12 @@ class MainActivity : AppCompatActivity() {
         val intentFilter = IntentFilter().apply {
             addAction(MyService.LOADED)
         }
-        registerReceiver(reciever, intentFilter)
+        localBroadcastManager.registerReceiver(reciever, intentFilter)
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-        unregisterReceiver(reciever)
+        localBroadcastManager.unregisterReceiver(reciever)
     }
 }
